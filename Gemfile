@@ -10,6 +10,8 @@ ruby '2.5.1'
 gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record
 
+#Use bcrypt for password on user ActiveModel
+gem 'bcrypt', '~> 3.1.7'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

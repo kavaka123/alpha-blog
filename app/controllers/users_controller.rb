@@ -14,8 +14,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Welcome to Alpha Blog #{@user.username}"
-      redirect_to articles_path
+      redirect_to user_path(@user)
     else
       render 'new'
     end
@@ -51,8 +52,8 @@ class UsersController < ApplicationController
     if logged_in? && current_user != @user
       flash[:danger] = "You can edit only your profile"
       redirect_to root_path
-    else
-      flash[:danger] = "You have either not signed up or you're not the rightful owner of the profile"
+    elsif ! logged_in?
+      flash[:danger] = "You have not logged in, Please Log in or Sign up"
       redirect_to root_path
     end
   end

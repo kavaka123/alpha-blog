@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   resources :users, except: [:new]
 
+  #create resourful routes for categories
+  resources :categories, except: [:destroy]
+
   #create routes for login/logout
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

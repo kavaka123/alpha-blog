@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new]
 
   #create resourful routes for categories
-  resources :categories, except: [:destroy]
+  resources :categories
 
   #create routes for login/logout
   get 'login', to: 'sessions#new'

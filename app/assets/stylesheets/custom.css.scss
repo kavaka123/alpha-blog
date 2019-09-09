@@ -12,6 +12,17 @@ $navbar-default-bg: black;
   font-weight: bold;
 }
 
+.badge {
+  background-color: lightblue;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.input-checkbox input {
+  width: auto !important;
+}
+
 #logo:hover {
   color: white;
   text-decoration: none;

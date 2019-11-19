@@ -17,6 +17,10 @@
 !/log/.keep
 !/tmp/.keep
 
+#Ignore test Junit test reports
+/test/reports/
+/test/html_reports/
+
 /node_modules
 /yarn-error.log
 

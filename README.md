@@ -5,6 +5,6 @@
 5. rake db:migrate
 6. rails server
 
-===========================================
+==========
 Testing git poll scm on github Push hook
-===========================================
+==========

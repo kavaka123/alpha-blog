@@ -1,19 +1,30 @@
 FROM ruby:2.5.1
 
-COPY . /application
+MAINTAINER Aditya Avanth <aditya.kaki@oracle.com>
 
-ENV RAILS_ENV production\
-    BUNDLER_VERSION=2.0.2
+ARG http_proxy
+ARG https_proxy
 
-WORKDIR /application
+RUN apt-get update &&\
+    apt-get install -y git vim &&\
+    rm -rf /var/lib/apt/lists/*
 
-RUN gem update --system &&\
-    gem install bundler:2.0.2 &&\
-    export BUNDLER_VERSION=2.0.2 &&\
-    bundle install --deployment --without production test && \
-    curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
-    apt install -y nodejs
-
-ENTRYPOINT ['./entrypoint.sh']
+RUN gem update --system 3.0.4 &&\
+    gem install bundler -v '2.0.2'
 
 
+WORKDIR /usr/src/app
+
+RUN git clone https://github.com/kavaka123/alpha-blog.git
+
+WORKDIR /usr/src/app/alpha-blog
+
+ENV BUNDLER_VERSION 2.0.2
+
+RUN bundle install &&\
+    rails db:setup &&\
+    rails db:migrate
+
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]    

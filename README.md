@@ -4,7 +4,4 @@
 4. rake db:schema:load
 5. rake db:migrate
 6. rails server
-
-==========
-Testing git poll scm on github Push hook
-==========
+7. rails test     #This will run unit and integration test suite

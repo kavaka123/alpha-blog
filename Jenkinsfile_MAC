@@ -5,7 +5,7 @@ node {
         }
     
         stage('Unit/Integration test and generating Junit test results') {
-            sh "bundle install --path vendor/bundle  && rake test"
+            sh "export PATH=$PATH:/Users/akaki/.rvm/bin && source \$(rvm 2.5.1 do rvm env --path) && bundle install && rake test"
             // sh "rails test"
             junit keepLongStdio: true, testResults: '**/test/reports/*.xml'
         }
@@ -17,7 +17,7 @@ node {
     } finally {
         stage ('Cleanup workspace') {
             echo "Cleaning up workspace in jenkins home dir"
-            //cleanWs()
+            cleanWs()
         }
     }
     

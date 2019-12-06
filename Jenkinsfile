@@ -6,7 +6,7 @@ node {
     
         stage('Unit/Integration test and generating Junit test results') {
             sh "bundle install --path vendor/bundle" 
-            sh "bundle exec rails test"
+            sh "bundle exec rake test"
             junit keepLongStdio: true, testResults: '**/test/reports/*.xml'
         }
         

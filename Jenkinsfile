@@ -6,7 +6,7 @@ node {
     
         stage('Unit/Integration test and generating Junit test results') {
             sh "bundle install --path vendor/bundle" 
-            sh "rake test"
+            sh "bundle exec rails test"
             junit keepLongStdio: true, testResults: '**/test/reports/*.xml'
         }
         
@@ -18,7 +18,7 @@ node {
     } finally {
         stage ('Cleanup workspace') {
             echo "Cleaning up workspace in jenkins home dir"
-            //cleanWs()
+            cleanWs()
         }
     }
     

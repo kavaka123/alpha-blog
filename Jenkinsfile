@@ -11,7 +11,7 @@ node {
         }
         
         stage('Build a tar file and archive') {
-           sh "tar --exclude ./.bundle --exclude ./tmp --exclude ./.git --exclude ./log --exclude ./db/*.sqlite3 --exclude *.tar.gz -cvzf ${JOB_NAME}${BUILD_ID}.tar.gz ."
+           sh "tar --exclude ./.bundle --exclude ./vendor --exclude ./tmp --exclude ./.git --exclude ./log --exclude ./db/*.sqlite3 --exclude *.tar.gz -cvzf ${JOB_NAME}${BUILD_ID}.tar.gz ."
            archiveArtifacts artifacts: '*.tar.gz', onlyIfSuccessful: true
         }
     } finally {

@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+vendor/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -28,3 +29,8 @@
 
 #Ignore sonarqube scannerwork
 .scannerwork/
+
+#Ignore code coverage report from simplecov gem
+coverage/
+
+

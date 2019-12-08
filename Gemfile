@@ -28,6 +28,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer'
 gem 'execjs'
 
+#Use simplecov gem for generating sonarwube coverage report
+gem 'simplecov', require: false, group: :test
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

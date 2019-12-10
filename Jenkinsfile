@@ -19,7 +19,7 @@ node {
 	    sh "tar --exclude ./.bundle --exclude ./vendor --exclude ./tmp --exclude ./.git --exclude ./log --exclude ./db/*.sqlite3 --exclude *.tar.gz -cvzf ${JOB_NAME}${BUILD_ID}.tar.gz ."
            archiveArtifacts artifacts: '*.tar.gz', onlyIfSuccessful: true
 
-           def server = Artifactory.server local-artifactory-server
+           def server = Artifactory.server 'local-artifactory-server'
            server.credentialsId = 'jenkins'
 	   def buildInfo = Artifactory.newBuildInfo()
 	   def uploadSpec = """{

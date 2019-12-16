@@ -38,8 +38,11 @@ node {
 	stage('Promote Build in artifactory') {
 	   def server = Artifactory.server 'local-artifactory-server'
            server.credentialsId = 'jenkins'
+	   def buildInfo = Artifactory.newBuildInfo()
            def promotionConfig = [
              'targetRepo'	: 'alpha-blog-prod',
+	     'buildName'	: buildInfo.name,
+	     'buildNumber'	: buildInfo.number,
 	     'comment'		: 'This is the promotion comment',
 	     'status'		: 'Released',
 	     'sourceRepo'	: 'alpha-blog-local',

@@ -34,6 +34,22 @@ node {
            server.upload spec: uploadSpec, buildInfo: buildInfo, failNoOp: true
            server.publishBuildInfo buildInfo
         }
+
+	stage('Promote Build in artifactory') {
+	   def server = Artifactory.server 'local-artifactory-server'
+           server.credentialsId = 'jenkins'
+           def promotionConfig = [
+             'targetRepo'	: 'alpha-blog-prod',
+	     'buildName'	: buildInfo.name,
+             'buildNumber'	: buildInfo.number,
+	     'comment'		: 'This is the promotion comment',
+	     'status'		: 'Released',
+	     'sourceRepo'	: 'alpha-blog-local',
+	     'copy'		: true,
+	     'failFast'		: true
+	   ]
+           server.promote promotionConfig
+        }
     } finally {
         stage ('Cleanup workspace') {
             echo "Cleaning up workspace in jenkins home dir"

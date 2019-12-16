@@ -16,7 +16,7 @@ node {
         
         stage('Archive tar file and upload to artifactory') {
             sh "touch ${JOB_NAME}${BUILD_ID}.tar.gz"
-	    sh "tar --exclude ./.bundle --exclude ./vendor --exclude ./tmp --exclude ./.git --exclude ./log --exclude ./db/*.sqlite3 --exclude *.tar.gz -czf ${JOB_NAME}${BUILD_ID}.tar.gz ."
+	    sh "tar --exclude ./.bundle --exclude ./vendor --exclude ./tmp --exclude ./.git --exclude ./log --exclude ./db/*.sqlite3 --exclude *.tar.gz -cvzf ${JOB_NAME}${BUILD_ID}.tar.gz ."
            archiveArtifacts artifacts: '*.tar.gz', onlyIfSuccessful: true
 
            def server = Artifactory.server 'local-artifactory-server'
@@ -33,20 +33,6 @@ node {
 
            server.upload spec: uploadSpec, buildInfo: buildInfo, failNoOp: true
            server.publishBuildInfo buildInfo
-        }
-
-	stage('Promote Build in artifactory') {
-	   def server = Artifactory.server 'local-artifactory-server'
-           server.credentialsId = 'jenkins'
-           def promotionConfig = [
-             'targetRepo'	: 'alpha-blog-prod',
-	     'comment'		: 'This is the promotion comment',
-	     'status'		: 'Released',
-	     'sourceRepo'	: 'alpha-blog-local',
-	     'copy'		: true,
-	     'failFast'		: true
-	   ]
-           server.promote promotionConfig
         }
     } finally {
         stage ('Cleanup workspace') {

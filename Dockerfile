@@ -22,8 +22,8 @@ WORKDIR /usr/src/app/alpha-blog
 ENV BUNDLER_VERSION 2.0.2
 
 RUN bundle install &&\
-    rails db:setup &&\
-    rails db:migrate
+    bundle exec rails db:setup &&\
+    bundle exec rails db:migrate
 
 EXPOSE 3000
 
